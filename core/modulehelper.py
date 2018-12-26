@@ -9,7 +9,7 @@ _all_ = ['MODULES', 'modules', 'modulenames', 'enabled_modules', \
 
 import loadconfig
 import sys
-
+import importlib
 
 MODULES = {}
 BASEURL = loadconfig.get('baseurl')
@@ -18,7 +18,7 @@ modules = loadconfig.get('modules')
 modulenames = loadconfig.get('modules_display')
 
 enabled_modules = [modulenames[x] for x in modules.keys() \
-        if modules[x] == "yes"]
+    if modules[x] == "yes"]
 
 
 def load_modules():
@@ -36,20 +36,24 @@ def load_modules():
 
     for key in modules.keys():
         if modules.get(key) == 'yes':
-            mod = None
+            module = None
             try:
-                mod = sys.modules[key]
-                if not type(mod).__name__ == 'module':
+                #mod = sys.modules[key]
+                module = importlib.import_module(key)
+                if not type(module).__name__ == 'module':
                     raise KeyError
             except KeyError:
                 try:
-                    mod = __import__(key, globals(), locals(), [])
+                    module = __import__(key, globals(), locals(), [])
                 except ImportError:
                     # Since we can't use logger from flask as its not yet
                     # activated we will write it to sys.stderr this should
                     # go to webserver error.log
-                    print >> sys.stderr, "Failed to import module {0}"\
-                            .format(key)
+                    print("Failed to import module {0}".format(key))
                     pass
-            if mod:
-                MODULES[key] = mod.getInstance()
+            if module:
+                if hasattr(module, 'getInstance'):
+                    print("Registered the module {0}".format(module))
+                    MODULES[key] = module.getInstance()
+                else:
+                    print("Registered the module {0} has no getInstance method".format(module))

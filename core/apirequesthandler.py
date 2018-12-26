@@ -1,26 +1,26 @@
 from json import loads, dumps
-from modulehelper import modules, modulenames, MODULES, enabled_modules, \
+from .modulehelper import modules, modulenames, MODULES, enabled_modules, \
         load_modules
 
 
-class JSONRPCHandlerException(Exception):
+class APIRequestHandlerException(Exception):
     pass
 
 
-class JSONRequestNotTranslatable(JSONRPCHandlerException):
+class JSONRequestNotTranslatable(APIRequestHandlerException):
     pass
 
 
-class BadServiceRequest(JSONRPCHandlerException):
+class BadServiceRequest(APIRequestHandlerException):
     pass
 
 
-class MethodNotFoundException(JSONRPCHandlerException):
+class MethodNotFoundException(APIRequestHandlerException):
     def __init__(self, name):
         self.methodname = name
 
 
-class JSONRPCHandler(object):
+class APIRequestHandler(object):
 
     def __init__(self):
         '''
@@ -65,21 +65,18 @@ class JSONRPCHandler(object):
 
     def handle_request(self, json):
         err = None
-        meth = None
+        method = None
         id_ = ''
         result = None
         args = None
 
-        try:
-            req = self.translate_request(json)
-        except JSONRequestNotTranslatable, e:
-            err = e
-            req = {'id': id_}
+        req = self.translate_request(json)
 
         if err == None:
             try:
                 id_ = req['id']
-                meth = req['method']
+                method = req['method']
+                module = req['module']
                 try:
                     args = req['params']
                 except:
@@ -90,13 +87,12 @@ class JSONRPCHandler(object):
             module_instance = None
             if err == None:
                 try:
-                    module_instance = MODULES.get(meth.split('.')[0])
+                    module_instance = MODULES.get(module)
                 except:
-                    err = MethodNotFoundException(meth.split('.')[-1])
+                    err = MethodNotFoundException(module)
 
-            method = None
-            if err == None:
-                result = self.call(getattr(module_instance, \
-                        meth.split('.')[-1]), args)
+
+            if err == None and method != None and module_instance != None :
+                result = self.call(getattr(module_instance, method), args)
 
             return self.translate_result(result, err, id_)

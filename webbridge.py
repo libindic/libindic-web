@@ -9,10 +9,10 @@
 from flask.views import MethodView
 from flask import render_template, request
 from core.modulehelper import modulenames, enabled_modules, BASEURL
-from core.jsonrpchandler import JSONRPCHandler
+from core.apirequesthandler import APIRequestHandler
 from flask import globals
 
-handler = JSONRPCHandler()
+handler = APIRequestHandler()
 
 
 class WebBridge(MethodView):
@@ -31,7 +31,7 @@ class WebBridge(MethodView):
                 .format(request.path, BASEURL))
         if request.path == BASEURL:
             # request is for document root
-            return render_template('index.html', title="SILPA", \
+            return render_template('index.html', title='LibIndic', \
                     main_page=BASEURL, modules=enabled_modules)
         elif request.path == BASEURL+ "License":
             return render_template('license.html', title="License",
@@ -55,11 +55,7 @@ class WebBridge(MethodView):
         '''
          Method from MethodView class which handles all HTTP POST requests
 
-         In our case only POST requests will be for JSONRPC.
-         This is how all page work so we are retaining this else RESTful
-         will be more modern way of doing stuff than RPC
         '''
-        if request.path.split('/')[-1] == "JSONRPC":
+        if request.path.endswith("api"):
             if request.data != None:
-                result = handler.handle_request(request.data)
-                return result
+                return handler.handle_request(request.data)

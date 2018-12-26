@@ -1,2 +1,2 @@
-from jsonrpchandler import *
-from modulehelper import *
+from .apirequesthandler import *
+from .modulehelper import *

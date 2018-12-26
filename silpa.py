@@ -3,7 +3,7 @@ from logging import handlers, Formatter
 from webbridge import WebBridge
 from core.modulehelper import enabled_modules, BASEURL, modules
 from jinja2 import PackageLoader, ChoiceLoader
-import loadconfig
+import loadconfig as config
 import logging
 import os
 
@@ -35,14 +35,14 @@ def register_url():
     for module in enabled_modules:
         module_url = baseurl + "/" + module if not baseurl == "/" \
             else baseurl + module
-        app.logger.debug("Registering the URL:{0}".format(module_url))
+        app.logger.debug("Registering the module URL:{0}".format(module_url))
         app.add_url_rule(module_url, view_func=WebBridge.as_view(module_url))
 
-    # JSONRPC url
-    jsonrpc_url = (baseurl + "/JSONRPC" if not baseurl == "/"
-                   else baseurl + "JSONRPC")
-    app.logger.debug("Registering the URL:{0}".format(baseurl))
-    app.add_url_rule(jsonrpc_url, view_func=WebBridge.as_view(jsonrpc_url))
+    # API url
+    api_url = (baseurl + "/api" if not baseurl == "/"
+                   else baseurl + "api")
+    app.logger.debug("Registering the API URL:{0}".format(api_url))
+    app.add_url_rule(api_url, view_func=WebBridge.as_view(api_url))
 
 
 def add_templates():
@@ -66,9 +66,9 @@ def configure_logging():
       configuration file but make sure the path  you give is writable for
       Webserver user, otherwise this will lead to an error.
     '''
-    log_level = loadconfig.get('log_level')
-    log_folder = loadconfig.get('log_folder')
-    log_name = loadconfig.get('log_name')
+    log_level = config.get('log_level')
+    log_folder = config.get('log_folder')
+    log_name = config.get('log_name')
     filename = os.path.join(log_folder, log_name)
 
     handler = handlers.TimedRotatingFileHandler(filename, when='D',
