@@ -1,1 +1,176 @@
-README
+SILPA
+==========
+SILPA - Indian Language computing platform which provides a web interface
+for different Indian language computing python modules. This is hosted at
+
+http://silpa.org.in
+
+This is a new SILPA platform a.k.a restructuring is in progress. I'm trying to
+use Flask microframe work and Jinja2 templating system. Additionally modules
+are moved out of the original SILPA code thus providing a way for developer to
+develop a python module without bothering about internals of SILPA itself.
+
+System Dependencies
+===================
+
+`Pango` and `cairo` can not be installed with pip and need to be installed
+from your platform’s packages. `lxml` and `CFFI` can, but you’d still need
+their own dependencies. This section lists system packages for lxml or
+CFFI when available, the dependencies otherwise. lxml needs `libxml2`
+and `libxslt`, CFFI needs `libffi`. On Debian, the package names with
+development files are `libxml2-dev`, `libxslt1-dev` and `libffi-dev`.
+
+
+###Debian 7.0 Wheezy or newer, Ubuntu 11.10 Oneiric or newer:
+```shell
+sudo apt-get install python-dev python-pip python-lxml libcairo2 \
+     libpango1.0-0 libgdk-pixbuf2.0-0 libffi-dev shared-mime-info
+	 ```
+
+####Debian 6.0 Squeeze, Ubuntu 10.04 Lucid:
+
+GDK-PixBuf is part of GTK+, which also depends on cairo and Pango.
+
+```shell
+sudo apt-get install python-dev python-pip python-lxml libgtk2.0-0 libffi-dev
+```
+###Fedora
+```shell
+sudo yum install python-devel python-pip python-lxml cairo pango gdk-pixbuf2\
+   libffi-devel
+```
+###Archlinux
+```shell
+sudo pacman -S python-pip python-lxml cairo pango gdk-pixbuf2
+```
+
+###Mac OS X
+
+####With Macports
+```shell
+sudo port install py27-pip py27-lxml cairo pango gdk-pixbuf2 libffi
+```
+####With Homebrew:
+```shell
+brew install python cairo pango gdk-pixbuf libxml2 libxslt libffi
+```
+
+
+VirtualEnv Instructions
+=======================
+
+If you are on Mac OS X or Linux, chances are that one of the following
+two commands will work for you:
+
+```shell
+$ sudo easy_install virtualenv
+```
+
+or even better:
+```shell
+$ sudo pip install virtualenv
+```
+
+One of these will probably install virtualenv on your system. Maybe it
+can be even in your package manager. If you use Ubuntu, try:
+
+```shell
+$ sudo apt-get install python-virtualenv
+```
+
+Once you have virtualenv installed, just fire up a shell and create
+your own environment.
+
+```shell
+$ git clone git@github.com:Project-SILPA/Silpa-Flask.git
+$ cd Silpa-Flask
+$ virtualenv --system-site-packages silpa
+New python executable in silpa/bin/python
+Installing distribute............done.
+```
+
+Now, whenever you want to work on a project, you only have to activate
+the corresponding environment. On OS X and Linux, do the following:
+
+```shell
+$ . silpa/bin/activate
+```
+
+If you are a Windows user, the following command is for you:
+
+```shell
+$ silpa\scripts\activate.bat
+```
+Either way, you should now be using your virtualenv (notice how the
+prompt of your shell has changed to show the active environment).
+
+Now you can just enter the following command to get Flask installed in
+your virtualenv:
+
+```shell
+$ pip install Flask
+```
+
+The following modules are available for SILPA:
+
+* [Soundex ](https://github.com/Project-SILPA/soundex)
+* [ApproxSearch](https://github.com/Project-SILPA/inexactsearch)
+* [Transliteration](https://github.com/Project-SILPA/Transliteration)
+* [Spellchecker](https://github.com/Project-SILPA/spellchecker)
+* [Hyphenation](https://github.com/Project-SILPA/Hyphenation)
+* [Chardetails](https://github.com/Project-SILPA/chardetails)
+* [Payyans](https://github.com/Project-SILPA/payyans)
+* [Text Similarity](https://github.com/Project-SILPA/text-similarity)
+* [N Gram](https://github.com/Project-SILPA/indicgram)
+* [Silpa Sort](https://github.com/Project-SILPA/ucasort)
+* [Indic Stemmer](https://github.com/Project-SILPA/indicstemmer)
+* [Katpayadi Numbers](https://github.com/Project-SILPA/Katapayadi)
+* [shingling](https://github.com/Project-SILPA/shingling)
+* [Indic-fortune](https://github.com/Project-SILPA/indicfortune) now renamed silpa-fortune
+* [scriptrender](https://github.com/Project-SILPA/scriptrender)
+
+Modules to be used with SILPA can be configured in the silpa.conf
+file. Modules marked 'yes' should be installed before running SILPA
+
+Here is a module installation example for Soundex. Repeat this for
+other modules.
+
+```shell
+mkdir modules
+cd modules
+git clone git@github.com:Project-SILPA/soundex.git
+cd Soundex
+python setup.py install
+```
+
+Now you can start SILPA by running
+```shell
+$ python silpa.py
+```
+You can access SILPA at http://localhost:5000
+
+If SILPA was running during a module installation, you will need to
+restart the server by killing and running `python silpa.py` again.
+
+How to Contribute?
+==========
+
+Your help is most welcome. You can do following to help me
+
+1. ~~Help me separate out modules from original SILPA~~
+2. Use it and report bugs
+3. Help me update docs
+4. ~~Get a new design for SILPA~~
+
+
+TODO
+==========
+
+1. ~~Serve Documentation and other pages through Flask and implement Jinja2~~
+2. ~~Get remaining modules of SILPA get their templates~~
+3. Provide RESTful API for all modules
+
+Known Bugs
+===========
+
+1. ~~Hyphenate module breaks it needs guesslanguage module~~
