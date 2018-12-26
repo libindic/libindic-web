@@ -28,6 +28,12 @@ Run the webserver
 flask run
 ```
 
+You may also run the same using gunicorn.
+
+```shell
+gunicorn libindic.web:app
+```
+
 ### System Dependencies
 
 For the script rendered module, there is a dependecy on some system libraries.
