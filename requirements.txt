@@ -19,3 +19,4 @@ Flask
 -e git+https://github.com/libindic/katapayadi.git#egg=katapayadi
 -e git+https://github.com/libindic/indicstemmer.git#egg=libindic_stemmer
 -e git+https://github.com/libindic/sandhi-splitter.git#egg=sandhisplitter
+gunicorn
