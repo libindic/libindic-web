@@ -74,23 +74,23 @@ brew install python cairo pango gdk-pixbuf libxml2 libxslt libffi
 
 ## Modules
 
-The following modules are available for SILPA:
+The following modules are available under libindic:
 
-* [Soundex](https://github.com/Project-SILPA/soundex)
-* [ApproxSearch](https://github.com/Project-SILPA/inexactsearch)
-* [Transliteration](https://github.com/Project-SILPA/Transliteration)
-* [Spellchecker](https://github.com/Project-SILPA/spellchecker)
-* [Hyphenation](https://github.com/Project-SILPA/Hyphenation)
-* [Chardetails](https://github.com/Project-SILPA/chardetails)
-* [Payyans](https://github.com/Project-SILPA/payyans)
-* [Text Similarity](https://github.com/Project-SILPA/text-similarity)
-* [N Gram](https://github.com/Project-SILPA/indicgram)
-* [Silpa Sort](https://github.com/Project-SILPA/ucasort)
-* [Indic Stemmer](https://github.com/Project-SILPA/indicstemmer)
-* [Katpayadi Numbers](https://github.com/Project-SILPA/Katapayadi)
-* [shingling](https://github.com/Project-SILPA/shingling)
-* [Indic-fortune](https://github.com/Project-SILPA/indicfortune) now renamed silpa-fortune
-* [scriptrender](https://github.com/Project-SILPA/scriptrender)
+* [Soundex](https://github.com/libindic/soundex)
+* [ApproxSearch](https://github.com/libindic/inexactsearch)
+* [Transliteration](https://github.com/libindic/Transliteration)
+* [Spellchecker](https://github.com/libindic/spellchecker)
+* [Hyphenation](https://github.com/libindic/Hyphenation)
+* [Chardetails](https://github.com/libindic/chardetails)
+* [Payyans](https://github.com/libindic/payyans)
+* [Text Similarity](https://github.com/libindic/text-similarity)
+* [N Gram](https://github.com/libindic/indicgram)
+* [Sort](https://github.com/libindic/ucasort)
+* [Indic Stemmer](https://github.com/libindic/indicstemmer)
+* [Katpayadi Numbers](https://github.com/libindic/Katapayadi)
+* [shingling](https://github.com/libindic/shingling)
+* [Indic-fortune](https://github.com/libindic/indicfortune)
+* [scriptrender](https://github.com/libindic/scriptrender)
 
-Modules to be used with SILPA can be configured in the silpa.conf
+Modules to be used with libindic can be configured in the app.conf
 file. Modules marked 'yes' should be installed before running SILPA

@@ -7,7 +7,7 @@ _all_ = ['get']
 class _SilpaConfig:
     def __init__(self):
         _config = RawConfigParser()
-        _config.read(os.path.join(os.path.dirname(__file__), 'silpa.conf'))
+        _config.read(os.path.join(os.path.dirname(__file__), 'app.conf'))
 
         self.site_name = _config.get('main', 'site')
         self.baseurl = _config.get('main', 'baseurl')
