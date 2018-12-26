@@ -7,7 +7,7 @@
 _all_ = ['MODULES', 'modules', 'modulenames', 'enabled_modules', \
         'load_modules', 'BASEURL']
 
-import loadconfig
+from . import loadconfig
 import sys
 import importlib
 

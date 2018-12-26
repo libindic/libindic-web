@@ -1,9 +1,9 @@
 from flask import Flask
 from logging import handlers, Formatter
-from webbridge import WebBridge
-from core.modulehelper import enabled_modules, BASEURL, modules
+from .webbridge import WebBridge
+from .modulehelper import enabled_modules, BASEURL, modules
 from jinja2 import PackageLoader, ChoiceLoader
-import loadconfig as config
+from . import loadconfig as config
 import logging
 import os
 

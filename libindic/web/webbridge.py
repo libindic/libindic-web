@@ -7,10 +7,9 @@
 '''
 
 from flask.views import MethodView
-from flask import render_template, request
-from core.modulehelper import modulenames, enabled_modules, BASEURL
-from core.apirequesthandler import APIRequestHandler
-from flask import globals
+from flask import render_template, request, globals
+from .modulehelper import modulenames, enabled_modules, BASEURL
+from .apirequesthandler import APIRequestHandler
 
 handler = APIRequestHandler()
 
