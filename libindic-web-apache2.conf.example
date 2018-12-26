@@ -1,0 +1,13 @@
+<VirtualHost *:80>
+    ServerName mydomain
+    WSGIDaemonProcess libindic user=www-data group=www-data threads=5 python-home=/home/user/path/to/libindic-web/ENV_DIR
+    WSGIScriptAlias /libindic /home/user/path/to/libindic-web/libindic.wsgi
+    <Directory /home/user/path/to/libindic-web/>
+        WSGIProcessGroup libindic
+        WSGIApplicationGroup %{GLOBAL}
+        WSGIScriptReloading On
+        Require all granted
+    </Directory>
+     ErrorLog ${APACHE_LOG_DIR}/error-libindic.log
+     CustomLog ${APACHE_LOG_DIR}/access-libindic.log combined
+</VirtualHost>
