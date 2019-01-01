@@ -56,5 +56,5 @@ class WebBridge(MethodView):
 
         '''
         if request.path.endswith("api"):
-            if request.data != None:
-                return handler.handle_request(request.data)
+            if request.json != None:
+                return handler.handle_request(request.json)

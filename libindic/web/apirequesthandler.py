@@ -6,11 +6,6 @@ from .modulehelper import modules, modulenames, MODULES, enabled_modules, \
 class APIRequestHandlerException(Exception):
     pass
 
-
-class JSONRequestNotTranslatable(APIRequestHandlerException):
-    pass
-
-
 class BadServiceRequest(APIRequestHandlerException):
     pass
 
@@ -27,13 +22,6 @@ class APIRequestHandler(object):
          This should be only once called. Atleast my assumption
         '''
         load_modules()
-
-    def translate_request(self, data):
-        try:
-            req = loads(data)
-        except:
-            raise JSONRequestNotTranslatable
-        return req
 
     def translate_result(self, result, error, id_):
         if error != None:
@@ -63,14 +51,12 @@ class APIRequestHandler(object):
         else:
             return method(*_args)
 
-    def handle_request(self, json):
+    def handle_request(self, req):
         err = None
         method = None
         id_ = ''
         result = None
         args = None
-
-        req = self.translate_request(json)
 
         if err == None:
             try:
