@@ -13,7 +13,7 @@ import importlib
 
 MODULES = {}
 BASEURL = loadconfig.get('baseurl')
-
+SITE = loadconfig.get('site_name')
 modules = loadconfig.get('modules')
 modulenames = loadconfig.get('modules_display')
 

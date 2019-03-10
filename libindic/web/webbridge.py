@@ -8,7 +8,7 @@
 
 from flask.views import MethodView
 from flask import render_template, request, globals
-from .modulehelper import modulenames, enabled_modules, BASEURL
+from .modulehelper import modulenames, enabled_modules, BASEURL,SITE
 from .apirequesthandler import APIRequestHandler
 
 handler = APIRequestHandler()
@@ -30,7 +30,7 @@ class WebBridge(MethodView):
                 .format(request.path, BASEURL))
         if request.path == BASEURL:
             # request is for document root
-            return render_template('index.html', title='LibIndic', \
+            return render_template('index.html', title=SITE, \
                     main_page=BASEURL, modules=enabled_modules)
         elif request.path == BASEURL+ "License":
             return render_template('license.html', title="License",
@@ -47,7 +47,7 @@ class WebBridge(MethodView):
             pathcomponent = request.path.split('/')[-1]
             for module, name in  modulenames.items():
                 if pathcomponent == name:
-                    return render_template(module + '.html', title=name, \
+                    return render_template(module + '.html', title=SITE, modulename=name,\
                             main_page=BASEURL, modules=enabled_modules)
 
     def post(self):

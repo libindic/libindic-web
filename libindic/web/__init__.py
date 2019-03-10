@@ -10,9 +10,9 @@ import os
 
 def register_url():
     '''
-     Function all form of URL which will be handled by SILPA service
+     Function all form of URL which will be handled by Libindic service
 
-     This function actually make this flask front end of SILPA independent
+     This function actually make this flask front end of Libindic independent
      of any modules. It doesn't know what modules are present nor doesn't
      know how to handle modules all the request will be promptly handed over
      to WebBridge
@@ -55,7 +55,7 @@ def add_templates():
 
 def configure_logging():
     '''
-      This function configures logging for the SILPA applications using Flask's
+      This function configures logging for the LibIndic applications using Flask's
       internal logger.
 
       For now log file will be rotated 7 days once and 4 backups will be kept.

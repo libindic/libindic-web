@@ -4,7 +4,7 @@ import os
 _all_ = ['get']
 
 
-class _SilpaConfig:
+class _LibindicConfig:
     def __init__(self):
         _config = RawConfigParser()
         _config.read(os.path.join(os.path.dirname(__file__), 'app.conf'))
@@ -29,7 +29,7 @@ class _SilpaConfig:
             self.modules_display[module] = name
 
 
-_config = _SilpaConfig()
+_config = _LibindicConfig()
 
 
 def get(key):
