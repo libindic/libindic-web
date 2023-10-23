@@ -8,7 +8,7 @@
 
 from flask.views import MethodView
 from flask import render_template, request, globals
-from .modulehelper import modulenames, enabled_modules, BASEURL,SITE
+from .modulehelper import modulenames, enabled_modules, BASEURL,SITE, MODULES
 from .apirequesthandler import APIRequestHandler
 
 handler = APIRequestHandler()
@@ -48,7 +48,8 @@ class WebBridge(MethodView):
             for module, name in  modulenames.items():
                 if pathcomponent == name:
                     return render_template(module + '.html', title=SITE, modulename=name,\
-                            main_page=BASEURL, modules=enabled_modules)
+                            main_page=BASEURL, modules=enabled_modules,
+                            data=getattr(MODULES[module], "data", {}))
 
     def post(self):
         '''

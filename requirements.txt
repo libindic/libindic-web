@@ -8,7 +8,6 @@ libindic-soundex>=1.0.2
 -e git+https://github.com/libindic/shingling.git#egg=libindic-shingling
 -e git+https://github.com/libindic/scriptrender.git#egg=scriptrender
 -e git+https://github.com/libindic/payyans.git#egg=libindic-payyans
--e git+https://github.com/libindic/normalizer.git#egg=libindic-normalizer
 -e git+https://github.com/libindic/inexactsearch.git#egg=libindic-inexactsearch
 -e git+https://github.com/libindic/syllabalizer.git#egg=libindic-syllabifier
 -e git+https://github.com/libindic/indicngram.git#egg=libindic-ngram
